@@ -19,8 +19,6 @@ async function getId(login) {
     }
 }
 
-let channels = []
-
 async function getFollows(id, cursor) {
     try {
         const response = await instance.get(
@@ -44,11 +42,11 @@ async function getChatters(channel) {
             return response.data.chatters.viewers
         }
     } catch (error) {
-        console.log(channel)
-
         console.error(error)
     }
 }
+
+let channels = []
 
 async function main(user) {
     console.log(`You begin to stalk ${user}`)
@@ -60,8 +58,7 @@ async function main(user) {
             const chatters = await getChatters(channel)
             for (const chatter of chatters) {
                 if (chatter.toLowerCase() === user) {
-                    console.log(channel)
-                    finded.push(channel)
+                    results.push(channel)
                     break
                 }
             }
